@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} ARTICLES INDEX {% endblock %}
+
+{% block body %}
+    <div class="wrap">
+        <a class="btn" href="{{ path('app_articles_new') }}">Create new</a>
+
+    <h1>Articles index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Contenu</th>
+                <th>Slug</th>
+                <th>Category</th>
+                <th>Updated_at</th>
+                <th>Created_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.title }}</td>
+                <td>{{ article.contenu }}</td>
+                <td>{{ article.slug }}</td>
+                <td>{{ article.category }}</td>
+                <td>{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td class="flex">
+                    <a href="{{ path('app_articles_show', {'id': article.id}) }}" class="btn">show</a>
+                    <a href="{{ path('app_articles_edit', {'id': article.id}) }}" class="btn">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+{% endblock %}
